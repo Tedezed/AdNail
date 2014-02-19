@@ -3,7 +3,7 @@ AdNail
 
 Api Web for self-generation product sales pages anonymously.
 
-###1.¿Que puede hacer esta aplicación por ti?
+###1.¿Que es AdNail?
 
 Esta aplicación busca reducir el tiempo que invierte un usuario en crear anuncios para vender productos en la red, como por ejemplo a la hora de poner productos en amazon, segundamano, milanuncios, ebay...etc. y reducirlo a un solo formulario, que significa esto, el usuario rellenaría un solo formulario de venta y este se enviaría a las paginas seleccionadas, evitando pasar por cada una creando anuncios a mano ahorrando tiempo. Además es te permite anunciarte de forma anónima Usando un correo anónimo que redirecciona al correo que seleccione el usuario.
 
@@ -15,7 +15,7 @@ AdNail nace como proyecto para ASIR, su nombre deriva de la expresión en españ
 
 AdNail funciona mediante Api de amazon,ebay..etc y 5ymail para obtener un correo anónimo y personal. Todo esto programado en lenguaje Python.
 
-![Alt text](/path/to/nsae01.casimages.net/img/2014/02/19/140219055351125461.png)
+![Alt text](nsae01.casimages.net/img/2014/02/19/140219055351125461.png)
 
 ####4.¿Como colaborar?
 
