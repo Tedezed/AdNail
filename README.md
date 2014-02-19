@@ -15,7 +15,7 @@ AdNail nace como proyecto para ASIR, su nombre deriva de la expresión en españ
 
 AdNail funciona mediante Api de amazon,ebay..etc y 5ymail para obtener un correo anónimo y personal. Todo esto programado en lenguaje Python.
 
-![Alt text](/path/to/http://nsae01.casimages.net/img/2014/02/19/140219055351125461.png)
+![Alt text](/path/to/nsae01.casimages.net/img/2014/02/19/140219055351125461.png)
 
 ####4.¿Como colaborar?
 
