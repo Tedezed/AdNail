@@ -26,19 +26,16 @@ dicc['SECURITY-APPNAME'] = appid
 entrada = raw_input('Palabras clave a buscar: ')
 dicc['keywords'] = entrada
 
-numresp = '3'
-#numresp = raw_input('Numero de resultados: ')
+#numresp = 3
+numresp = int(raw_input('Numero de resultados: '))
 dicc['paginationInput.entriesPerPage'] = numresp
 
 respuesta = requests.get(url,params = dicc)
-
 dicc = json.loads(respuesta.text.encode("utf-8"))
-print dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][0]['title'][0]
-print dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][0]['sellingStatus'][0]['currentPrice'][0]['@currencyId']
-print dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][0]['sellingStatus'][0]['currentPrice'][0]['__value__']
-print dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][1]['title'][0]
-print dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][1]['sellingStatus'][0]['currentPrice'][0]['@currencyId']
-print dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][1]['sellingStatus'][0]['currentPrice'][0]['__value__']
-print dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][2]['title'][0]
-print dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][2]['sellingStatus'][0]['currentPrice'][0]['@currencyId']
-print dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][2]['sellingStatus'][0]['currentPrice'][0]['__value__']
+
+contador = 0
+while numresp > contador:
+	print dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][contador]['title'][0]
+	print dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][contador]['sellingStatus'][0]['currentPrice'][0]['@currencyId']
+	print dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][contador]['sellingStatus'][0]['currentPrice'][0]['__value__']
+	contador = contador + 1
