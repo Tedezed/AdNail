@@ -10,6 +10,6 @@ def inicio():
 @post('/resultado')
 def resultado():
 	busqueda = request.froms.get('busqueda')
-	return bottle.template('resultado.tpl', )
+	return bottle.template('resultado.tpl', busqueda)
 
 bottle.run(host=iphost, port=8080)
