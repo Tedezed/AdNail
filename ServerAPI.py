@@ -22,11 +22,11 @@ dicc['SECURITY-APPNAME'] = appid
 
 iphost = raw_input('Introduce IP Server: ')
 
-@get('/')
+@bottle.get('/')
 def inicio():
 	return bottle.template('index.tpl')
 
-@post('/resultado')
+@bottle.post('/resultado')
 def resultado():
 	entrada = request.froms.get('busqueda')
 	dicc['keywords'] = entrada
