@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta content="true" name="mssmarttagspreventparsing" />
+	<meta http-equiv="imagetoolbar" content="no" />
+	<title>AdNail - Busqueda</title>
+	<link href="css/style2.css" rel="stylesheet" type="text/css" />
+	<!-- IE fixes -->
+	<!--[if lte IE 6]>
+	<style type="text/css">
+		#ccnt {_height:1200px;}
+		.post {padding:0 0 25px;}
+	</style>
+	<![endif]-->
+	<script type="text/javascript">
+	/*
+	 * Simple JS function for setting the search value
+	 */
+	function clS(t){
+		var srch = document.getElementById('s'), val = srch.value.toString().toLowerCase(), re = /^\s+$/;
+		if(t) {
+			if(val == 'search...' || val == 'search'){ 
+				srch.value = '';
+			}
+		} else {
+			if(val == 'search...' || val == 'search' || val == '' || re.test(val)) {
+				srch.value = 'search...';
+			}
+		}
+	}
+	</script>
+
+</head>
+
+<body>
+
+<!-- Header -->
+<div id="hdr">
+	
+	<!-- Logo -->
+	<div id="logo">
+                <a href="/"></a>
+	</div>
+	
+	<!-- Slogan -->
+  <p class="htit">Posteador y busqueda de productos en multiples plataformas.</p>
+
+	<!-- Main Menu -->
+	<div id="menu"></div>
+</div>
+<div id="busqueda">
+<!-- Search form -->
+	<form id="search_form" action="/resultado" method="post">
+		<input class="search_field" type="text" value="search..." onfocus="clS(1);" onblur="clS(0);"  name="entrada" id="s" />
+		<input class="search_button" type="submit"  value="" id="searchsubmit" />
+	</form>
+</div>
+</body>
+</html>
+

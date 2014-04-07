@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta content="true" name="mssmarttagspreventparsing" />
+	<meta http-equiv="imagetoolbar" content="no" />
+	<title>AdNail - Resultado</title>
+	<link href="css/style2.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<!-- Header -->
+<div id="hdr">
+	
+	<!-- Logo -->
+	<div id="logo">
+                <a href="/"></a>
+	</div>
+	
+	<!-- Slogan -->
+  <p class="htit">Posteador y busqueda de productos en multiples plataformas.</p>
+
+	<!-- Main Menu -->
+	<div id="menu"></div>
+</div>
+<div id="resultado">
+	<center>
+	<h1>Resultados de Busqueda</h1>
+	<h3>Productos:</h3>
+	% count = 0 
+	% for i in titleh:
+		<h4>{{i}}</h4>
+		<IMG SRC="{{imagurgh[count]}}"WIDTH=15% HEIGHT=15% BORDER=1>
+		<li>Precio: {{precioh[count]}} {{monedah[count]}}</li>
+		% count = count + 1 
+	% end
+</center>
+</div>
+</body>
+</html>
+
