@@ -6,6 +6,7 @@ Api Web for self-generation product sales pages anonymously.
 ###1.¿Que es AdNail?
 
 Esta aplicación busca reducir el tiempo que invierte un usuario en crear anuncios para vender productos en la red, como por ejemplo a la hora de poner productos en ebay, segundamano, milanuncios...etc. y reducirlo a un solo formulario, que significa esto, el usuario rellenaría un solo formulario de venta y este se enviaría a las paginas seleccionadas, evitando pasar por cada una creando anuncios a mano ahorrando tiempo. Además este permite anunciarte de forma anónima usando un correo anónimo que redirecciona al correo que seleccione el usuario.
+Tambien permitira buscar productos de una sola vez en las webs de ventas de productos de primera y segunda mano.
 
 ####2.¿De donde nace AdNail?
 
