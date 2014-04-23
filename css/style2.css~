@@ -8,7 +8,7 @@ body {
 	margin: 0 auto;
 	width:1000px;
 	height:400px;
-	background: url(../images/header.jpg) no-repeat;
+	background: url(../images/header2.jpg) no-repeat;
 	position: relative;
 	z-index:5;
 }
@@ -64,7 +64,6 @@ body {
 	width:620px;
 	height:194px;
 	margin:30px auto;
-	margin-right:122px; 
 }
 #menu a {
 	display:block;
@@ -86,6 +85,10 @@ body {
 }
 .menu_grap {
 	background: url(../images/icons/palette_128.png) no-repeat;
+}
+.menu_frm {
+	background: url(../images/icons/comments_128.png) no-repeat;
+	background-position:0px 11px;
 }
 .menu_fnt {
 	background: url(../images/icons/text_page_128.png) no-repeat;

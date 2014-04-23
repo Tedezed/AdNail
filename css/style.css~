@@ -64,7 +64,7 @@ body {
 	width:620px;
 	height:194px;
 	margin:30px auto;
-	margin-right:122px; 
+	margin-right:120px; 
 }
 #menu a {
 	display:block;

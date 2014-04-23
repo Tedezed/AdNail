@@ -86,10 +86,6 @@ body {
 .menu_grap {
 	background: url(../images/icons/palette_128.png) no-repeat;
 }
-.menu_frm {
-	background: url(../images/icons/comments_128.png) no-repeat;
-	background-position:0px 11px;
-}
 .menu_fnt {
 	background: url(../images/icons/text_page_128.png) no-repeat;
 	background-position:0px 4px;

@@ -29,6 +29,7 @@
 	<div id="menu">
 		<a class="menu_freeb" href="#">Anunciate</a>
 		<a class="menu_grap" href="busqueda">Busqueda</a>
+		<a class="menu_frm" href="#"></a>
 		<a class="menu_fnt" href="contacto">Contacto</a>
 	</div>
 </div>
