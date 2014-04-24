@@ -2,8 +2,7 @@ from bottle import get, post, route, request, run, template, static_file
 import requests
 import requests
 import json
-
-iphost = raw_input('Introduce IP Server: ')
+import commands
 
 fil = open('Key.conf','r')
 key = ''
@@ -13,7 +12,6 @@ key = key.replace("\n","")
 fil.close()
 exec key
 
-#Archivos Estaticos
 @get('/css/<filename:re:.*\.css>')
 def sever_static(filename):
     return static_file(filename, root='css')
@@ -67,9 +65,15 @@ def salida():
             moneda.append(monedac)
             precio.append(dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][contador]['sellingStatus'][0]['currentPrice'][0]['__value__'])
             contador = contador + 1
-
         return template('resultado.html',imagurgh=imagurg,titleh=title,monedah=moneda,precioh=precio)
     except KeyError:
         return template('busqueda_error.html',entradah=entrada)
+
+print "AdNail - Interfaces disponibles: "
+print commands.getoutput("/sbin/ifconfig | egrep -o '^[a-z].......'")
+intfz = raw_input('Introduce la interfaz a utilizar: ')
+comand = "/sbin/ifconfig "+intfz+" | egrep -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | egrep -v '*(0|255)$'"
+iphost = commands.getoutput(comand)
+print "La IP del Servidor es: ", iphost
 
 run(host=iphost, port=8080, debug=True)
