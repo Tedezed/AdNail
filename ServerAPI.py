@@ -1,6 +1,6 @@
-from bottle import get, post, route, request, run, template, static_file
+from bottle import get, post, route, request, run, template, static_file, TEMPLATE_PATH, default_app
 import requests
-import requests
+import os
 import json
 import commands
 
@@ -69,11 +69,21 @@ def salida():
     except KeyError:
         return template('busqueda_error.html',entradah=entrada)
 
-print "AdNail - Interfaces disponibles: "
-print commands.getoutput("/sbin/ifconfig | egrep -o '^[a-z].......'")
-intfz = raw_input('Introduce la interfaz a utilizar: ')
-comand = "/sbin/ifconfig "+intfz+" | egrep -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | egrep -v '*(0|255)$'"
-iphost = commands.getoutput(comand)
-print "La IP del Servidor es: ", iphost
 
-run(host=iphost, port=8080, debug=True)
+ON_OPENSHIFT = False
+if os.environ.has_key('OPENSHIFT_REPO_DIR'):
+    ON_OPENSHIFT = True
+
+if ON_OPENSHIFT:
+    TEMPLATE_PATH.append(os.path.join(os.environ['OPENSHIFT_HOMEDIR'],
+                                      'runtime/repo/wsgi/views/'))
+    
+    application=default_app()
+else:
+    print "AdNail - Interfaces disponibles: "
+    print commands.getoutput("/sbin/ifconfig | egrep -o '^[a-z].......'")
+    intfz = raw_input('Introduce la interfaz a utilizar: ')
+    comand = "/sbin/ifconfig "+intfz+" | egrep -o '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | egrep -v '*(0|255)$'"
+    iphost = commands.getoutput(comand)
+    print "La IP del Servidor es: ", iphost
+    run(host=iphost, port=8080, debug=True)
