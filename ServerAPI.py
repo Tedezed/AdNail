@@ -1,7 +1,6 @@
-from bottle import get, post, route, request, run, template, static_file
+from bottle import get, post, route, request, run, template, static_file, response
 from shift_local import shift_local
-import requests
-import json
+from ebay import busqueda
 
 fil = open('Key.conf','r')
 key = ''
@@ -32,41 +31,32 @@ def contacto():
     return template('contacto.html')
 
 @post('/resultado')
-def salida():
+def resultado():
     try:
-        url = 'http://svcs.ebay.com/services/search/FindingService/v1?'
-        dicc = {'OPERATION-NAME':'findItemsByKeywords',
-        'SERVICE-VERSION':'1.0.0',
-        'SECURITY-APPNAME':'',
-        'RESPONSE-DATA-FORMAT':'JSON',
-        'keywords':'',
-        'paginationInput.entriesPerPage':''}
-
-        dicc['SECURITY-APPNAME'] = appid
-        entrada = request.forms.get('entrada')
-        dicc['keywords'] = entrada
-        numresp = 15
-        dicc['paginationInput.entriesPerPage'] = numresp
-
-        respuesta = requests.get(url,params = dicc)
-        dicc = json.loads(respuesta.text.encode("utf-8"))
-
-        imagurg = []
-        title = []
-        moneda = []
-        precio = []
-        contador = 0
-        while numresp > contador:
-            imagurg.append(dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][contador]['galleryURL'][0])
-            title.append(dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][contador]['title'][0])
-            monedac = dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][contador]['sellingStatus'][0]['currentPrice'][0]['@currencyId']
-            monedac = monedac.replace("USD", "$")
-            moneda.append(monedac)
-            precio.append(dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][contador]['sellingStatus'][0]['currentPrice'][0]['__value__'])
-            contador = contador + 1
-        return template('resultado.html',imagurgh=imagurg,titleh=title,monedah=moneda,precioh=precio)
+        entrada = ''
+        numpag = 1
+        response.set_cookie('busqueda', str(numpag))
+        return busqueda(appid,numpag,entrada)
     except KeyError:
         return template('busqueda_error.html',entradah=entrada)
+
+@route('/resultado+')
+def resultado():
+    entrada = request.cookies.get('entrada', 'entrada')
+    numpag = int(request.cookies.get('busqueda', '1'))
+    if numpag < 90:
+        numpag = numpag + 1
+    response.set_cookie('busqueda', str(numpag))
+    return busqueda(appid,numpag,entrada)
+
+@route('/resultado-')
+def resultado():
+    entrada = request.cookies.get('entrada', 'entrada')
+    numpag = int(request.cookies.get('busqueda', '1'))
+    if numpag > 1:
+        numpag = numpag - 1
+    response.set_cookie('busqueda', str(numpag))
+    return busqueda(appid,numpag,entrada)
 
 #Deteccion de entorno, OpenShift o local.
 shift_local()
