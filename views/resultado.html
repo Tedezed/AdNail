@@ -30,13 +30,19 @@
 	<h3>Productos:</h3>
 	% count = 0 
 	% for i in titleh:
-		<h4>{{i}}</h4>
-		<IMG SRC="{{imagurgh[count]}}"WIDTH=15% HEIGHT=15% BORDER=1>
-		<li>Precio: {{precioh[count]}} {{monedah[count]}}</li>
+		<h4><a href="{{urlitemh[count]}}">{{i}}</a></h4>
+		<a href="{{urlitemh[count]}}"><IMG SRC="{{imagurgh[count]}}"WIDTH=15% HEIGHT=15% BORDER=1></a>
+		<h3><li>Precio: {{precioh[count]}} {{monedah[count]}}</li></h3>
 		% count = count + 1 
 	% end
-
-	<h2><a href="/resultado-">Pagina anterior</a><b> </b><a href="/resultado+">Pagina Siguiente</a></h2>
+	<p>
+	</b>
+	</p>
+	<h2><a href="/resultado-">...Pagina anterior</a><b> </b><a href="/resultado+">Pagina Siguiente...</a></h2>
+	<p>
+	<b> </b>
+	<b> </b>
+	</p>
 </center>
 </div>
 </body>

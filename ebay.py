@@ -10,7 +10,8 @@ def busqueda(appid,numpag,entrada):
     'RESPONSE-DATA-FORMAT':'JSON',
     'keywords':'',
     'paginationInput.entriesPerPage':'',
-    'paginationInput.pageNumber':''}
+    'paginationInput.pageNumber':'',
+    'StoreURL':''}
     dicc['SECURITY-APPNAME'] = appid
 
     if entrada == '':
@@ -18,6 +19,7 @@ def busqueda(appid,numpag,entrada):
         response.set_cookie('entrada', entrada)
 
     dicc['keywords'] = entrada
+    print "Busqueda del cliente:-", entrada, "-Pag.", numpag
     numresp = 15
     dicc['paginationInput.entriesPerPage'] = numresp
     dicc['paginationInput.pageNumber'] = numpag
@@ -29,6 +31,7 @@ def busqueda(appid,numpag,entrada):
     title = []
     moneda = []
     precio = []
+    urlitem = []
     contador = 0
     while numresp > contador:
         imagurg.append(dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][contador]['galleryURL'][0])
@@ -36,7 +39,8 @@ def busqueda(appid,numpag,entrada):
         monedac = dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][contador]['sellingStatus'][0]['currentPrice'][0]['@currencyId']
         monedac = monedac.replace("USD", "$")
         moneda.append(monedac)
+        urlitem.append(dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][contador]['viewItemURL'][0])
         precio.append(dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][contador]['sellingStatus'][0]['currentPrice'][0]['__value__'])
         contador = contador + 1
-    return template('resultado.html',imagurgh=imagurg,titleh=title,monedah=moneda,precioh=precio)
+    return template('resultado.html',imagurgh=imagurg,titleh=title,monedah=moneda,precioh=precio,urlitemh=urlitem)
     
