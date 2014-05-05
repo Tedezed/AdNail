@@ -17,9 +17,10 @@ a:link {
 	font-weight: bold; 
 	text-decoration: none; 
 }
+}
 #hdr {
 	margin: 0 auto;
-	width:1020px;
+	width:1000px;
 	height:400px;
 	background: url(../images/header.jpg) no-repeat;
 	position: relative;
@@ -73,7 +74,7 @@ a:link {
 	font-size:9px;
 }
 #menu {
-	width:540px !important;
+	width:592px !important;
 	width:620px;
 	height:194px;
 	margin:30px auto;

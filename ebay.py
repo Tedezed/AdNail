@@ -20,7 +20,7 @@ def busqueda(appid,numpag,entrada):
 
     dicc['keywords'] = entrada
     print "Busqueda del cliente:-", entrada, "-Pag.", numpag
-    numresp = 15
+    numresp = 29
     dicc['paginationInput.entriesPerPage'] = numresp
     dicc['paginationInput.pageNumber'] = numpag
 
@@ -42,5 +42,6 @@ def busqueda(appid,numpag,entrada):
         urlitem.append(dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][contador]['viewItemURL'][0])
         precio.append(dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][contador]['sellingStatus'][0]['currentPrice'][0]['__value__'])
         contador = contador + 1
+
     return template('resultado.html',imagurgh=imagurg,titleh=title,monedah=moneda,precioh=precio,urlitemh=urlitem)
     

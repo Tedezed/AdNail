@@ -1,6 +1,10 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from bottle import get, post, route, request, run, template, static_file, response
 from shift_local import shift_local
 from ebay import busqueda
+from MilAnunciosBrainSlug import BrainSlugMA
 
 fil = open('Key.conf','r')
 key = ''
@@ -32,31 +36,50 @@ def contacto():
 
 @post('/resultado')
 def resultado():
-    try:
-        entrada = ''
-        numpag = 1
-        response.set_cookie('busqueda', str(numpag))
-        return busqueda(appid,numpag,entrada)
-    except KeyError:
-        return template('busqueda_error.html',entradah=entrada)
+    buscador = request.forms.get('buscador')
+    print 'Metodo:',buscador
+    response.set_cookie('buscador', 'metodo')
+    response.set_cookie('buscador', buscador)
+    entrada = ''
+    numpag = 1
+    response.set_cookie('busqueda', str(numpag))
+    if buscador == 'ebay':
+        try:
+            return busqueda(appid,numpag,entrada)
+        except KeyError:
+            return template('busqueda_error.html',entradah=entrada)
+    elif buscador == 'milanuncios':
+        return BrainSlugMA(numpag,entrada)
 
 @route('/resultado+')
 def resultado():
+    buscador = request.cookies.get('buscador', 'metodo')
+    print 'Metodo:',buscador
     entrada = request.cookies.get('entrada', 'entrada')
-    numpag = int(request.cookies.get('busqueda', '1'))
+    numpag = int(request.cookies.get('busqueda', 'metodo'))
     if numpag < 90:
         numpag = numpag + 1
     response.set_cookie('busqueda', str(numpag))
-    return busqueda(appid,numpag,entrada)
+
+    if buscador == 'ebay':
+        return busqueda(appid,numpag,entrada)
+    elif buscador == 'milanuncios':
+        return BrainSlugMA(numpag,entrada)
 
 @route('/resultado-')
 def resultado():
+    buscador = request.cookies.get('buscador', 'metodo')
+    print 'Metodo:',buscador
     entrada = request.cookies.get('entrada', 'entrada')
-    numpag = int(request.cookies.get('busqueda', '1'))
+    numpag = int(request.cookies.get('busqueda', 'metodo'))
     if numpag > 1:
         numpag = numpag - 1
     response.set_cookie('busqueda', str(numpag))
-    return busqueda(appid,numpag,entrada)
+
+    if buscador == 'ebay':
+        return busqueda(appid,numpag,entrada)
+    elif buscador == 'milanuncios':
+        return BrainSlugMA(numpag,entrada)
 
 #Deteccion de entorno, OpenShift o local.
 shift_local()
