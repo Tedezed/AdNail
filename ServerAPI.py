@@ -4,7 +4,8 @@
 from bottle import get, post, route, request, run, template, static_file, response
 from shift_local import shift_local
 from ebay import busqueda
-from MilAnunciosBrainSlug import BrainSlugMA
+from BrainSlug import BrainSlugMA
+from BrainSlug import BrainSlugTA
 
 fil = open('Key.conf','r')
 key = ''
@@ -50,6 +51,8 @@ def resultado():
             return template('busqueda_error.html',entradah=entrada)
     elif buscador == 'milanuncios':
         return BrainSlugMA(numpag,entrada)
+    elif buscador == 'tusanuncios':
+        return BrainSlugTA(numpag,entrada)
 
 @route('/resultado+')
 def resultado():
@@ -65,6 +68,8 @@ def resultado():
         return busqueda(appid,numpag,entrada)
     elif buscador == 'milanuncios':
         return BrainSlugMA(numpag,entrada)
+    elif buscador == 'tusanuncios':
+        return BrainSlugTA(numpag,entrada)
 
 @route('/resultado-')
 def resultado():
@@ -80,6 +85,8 @@ def resultado():
         return busqueda(appid,numpag,entrada)
     elif buscador == 'milanuncios':
         return BrainSlugMA(numpag,entrada)
+    elif buscador == 'tusanuncios':
+        return BrainSlugTA(numpag,entrada)
 
 #Deteccion de entorno, OpenShift o local.
 shift_local()
