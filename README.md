@@ -24,8 +24,8 @@ AdNail funciona mediante Api de ebay..etc, tambien usa 5ymail para obtener un co
 | ------------- |:-------------:| ---------:|
 | ebay          | API           | Incluido  |
 | MilAnuncios   | Web Scraping  | Incluido  |
+| TusAnuncios   | Web Scraping  | Incluido  |
 | SegundaMano   | Web Scraping  | Previsto  |
-| TusAnuncios   | Web Scraping  | Previsto  |
 | ElBaul        | Web Scraping  |    N/N    |
 | Loquo         | Web Scraping  |    N/N    |
 | idealista     |     N/N       |    N/N    |
