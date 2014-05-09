@@ -8,7 +8,7 @@ def BrainSlugMA(numpag,entrada):
     if entrada == '':
         entrada = request.forms.get('entrada')
         response.set_cookie('entrada', entrada)
-    print "Busqueda del cliente:-", entrada, "-Pag.", numpag
+    print "Busqueda MilAnuncios del cliente:-", entrada, "-Pag.", numpag
 
     urlbusq = 'http://www.milanuncios.com/anuncios/'
     palabra = entrada
@@ -21,16 +21,18 @@ def BrainSlugMA(numpag,entrada):
 
     error = re.findall('class="nohayanuncios"', htmlread)
     if error:
-        return template('busqueda_error.html',entradah=entrada)
+        return ''
     else:
         resulhtml = re.findall('<div\ class=x1>[\s\S\w\W]*', htmlread)
         listahtml = resulhtml[0].split("<div class=x10>")
         del listahtml[30]
 
-        listtitulo = []
-        listprecio = []
-        listlink = []
-        listphoto = []
+        listtitulo_ma = []
+        listprecio_ma = []
+        listlink_ma = []
+        listphoto_ma = []
+        listmoneda_ma =  []
+        listmetodo_ma = []
         serverimg = 'http://91.229.239.12/fg/'
         for prodct in listahtml:
             titulo = re.findall('<div\ class=x4>.*', prodct)
@@ -42,14 +44,14 @@ def BrainSlugMA(numpag,entrada):
                 titulo = titulo.decode("utf-8", "replace")
             else:
                 titulo = 'Producto'
-            listtitulo.append(titulo)
+            listtitulo_ma.append(titulo)
 
             precio = re.findall('<div\ class=pr>[0-9.]*', prodct)
             if precio:
                 precio = precio[0].replace('<div class=pr>','')
             else:
                 precio = 'N/A'
-            listprecio.append(precio)
+            listprecio_ma.append(precio)
 
             link = re.findall('<div\ class=x7><a href=".*"', prodct)
             if link:
@@ -57,7 +59,7 @@ def BrainSlugMA(numpag,entrada):
                 link = link.replace('<div class=x7><a href=','')
             else:
                 link = 'N/A'
-            listlink.append('http://www.milanuncios.com' + link)
+            listlink_ma.append('http://www.milanuncios.com' + link)
 
             ide = re.findall('<div\ class=x5>r[0-9A-Z]*', prodct)
             ide = ide[0].replace('<div class=x5>r','')
@@ -65,11 +67,14 @@ def BrainSlugMA(numpag,entrada):
             cod2 =  ide[strlong - 5:strlong - 3]
             cod1 = ide[0:strlong - 5]
             photo = serverimg + cod1 + '/' + cod2 + '/' + ide + '_1.jpg'
-            listphoto.append(photo)
+            listphoto_ma.append(photo)
 
-        numlist = 0
+            listmoneda_ma.append('&euro;')
+            listmetodo_ma.append('MilAnuncios')
 
-    return template('resultado2.html',listtituloh=listtitulo,listphotoh=listphoto,listlinkh=listlink,listprecioh=listprecio)
+    dicma = {'listtitulo_ma':listtitulo_ma,'listlink_ma':listlink_ma,'listprecio_ma':listprecio_ma,'listphoto_ma':listphoto_ma,'listmoneda_ma':listmoneda_ma,'listmetodo_ma':listmetodo_ma}
+
+    return dicma
 
 def BrainSlugTA(numpag,entrada):
     #!/usr/bin/env python
@@ -81,7 +86,7 @@ def BrainSlugTA(numpag,entrada):
     if entrada == '':
         entrada = request.forms.get('entrada')
         response.set_cookie('entrada', entrada)
-    print "Busqueda del cliente:-", entrada, "-Pag.", numpag
+    print "Busqueda TusAnuncios del cliente:-", entrada, "-Pag.", numpag
 
     urlbusq = 'http://www.tusanuncios.com/clasificados/query='
     palabra = entrada
@@ -94,7 +99,7 @@ def BrainSlugTA(numpag,entrada):
 
     error = re.findall('<div id="EmptyContent">', htmlread)
     if error:
-        return template('busqueda_error.html',entradah=entrada)
+        return ''
     else:
         htmlread = re.findall('<div class="grid_product "[\s\S\w\W]*',htmlread)
         htmlread = htmlread[0].replace('\r','')
@@ -102,25 +107,27 @@ def BrainSlugTA(numpag,entrada):
         listahtml = htmlread.split('<div class="ad_textlink_search">')
         del listahtml[20]
 
-        listtitulo = []
-        listprecio = []
-        listlink = []
-        listphoto = []
+        listtitulo_ta = []
+        listprecio_ta = []
+        listlink_ta = []
+        listphoto_ta = []
+        listmoneda_ta =  []
+        listmetodo_ta = []
         for prodct in listahtml:
-            titulo = re.findall(';tipo=5"\ >[0-9A-Za-z .]*', prodct)
+            titulo = re.findall(';tipo=5"\ >[0-9A-Za-z .*]*', prodct)
             if titulo:
                 titulo = titulo[0].replace(';tipo=5" >                                            ','')
                 titulo = titulo.decode("utf-8", "replace")
             else:
                 titulo = 'Producto'
-            listtitulo.append(titulo)
+            listtitulo_ta.append(titulo)
 
             precio = re.findall('<div\ class="price">[0-9 .]*', prodct)
             if precio:
                 precio = precio[0].replace('<div class="price">                                    ','')
             else:
                 precio = 'N/A'
-            listprecio.append(precio)
+            listprecio_ta.append(precio)
 
             link = re.findall("window.location='[0-9A-Za-z/?=&;]*", prodct)
             if link:
@@ -129,7 +136,7 @@ def BrainSlugTA(numpag,entrada):
                 link = 'http://www.tusanuncios.com' + link
             else:
                 link = 'N/A'
-            listlink.append(link)
+            listlink_ta.append(link)
 
             photo = re.findall('class="thumbnail" src="http://[0-9A-Za-z._/-]*"', prodct)
             if photo:
@@ -137,7 +144,12 @@ def BrainSlugTA(numpag,entrada):
                 photo = photo.replace('"','')
                 photo = photo.replace('_2.jpg','_3.jpg')
             else:
-                photo = 'http://www.tusanuncios.com/img/error_532_400.gif'
-            listphoto.append(photo)
+                photo = 'http://www.kerrdental.es/res/global/product_515_275_noPhoto.jpg'
+            listphoto_ta.append(photo)
 
-    return template('resultado2.html',listtituloh=listtitulo,listphotoh=listphoto,listlinkh=listlink,listprecioh=listprecio)
+            listmoneda_ta.append('&euro;')
+            listmetodo_ta.append('TusAnuncios')
+
+    dicta = {'listtitulo_ta':listtitulo_ta,'listlink_ta':listlink_ta,'listprecio_ta':listprecio_ta,'listphoto_ta':listphoto_ta,'listmoneda_ta':listmoneda_ta,'listmetodo_ta':listmetodo_ta}
+
+    return dicta

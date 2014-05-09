@@ -19,7 +19,7 @@ def busqueda(appid,numpag,entrada):
         response.set_cookie('entrada', entrada)
 
     dicc['keywords'] = entrada
-    print "Busqueda del cliente:-", entrada, "-Pag.", numpag
+    print "Busqueda Ebay del cliente:-", entrada, "-Pag.", numpag
     numresp = 29
     dicc['paginationInput.entriesPerPage'] = numresp
     dicc['paginationInput.pageNumber'] = numpag
@@ -27,21 +27,27 @@ def busqueda(appid,numpag,entrada):
     respuesta = requests.get(url,params = dicc)
     dicc = json.loads(respuesta.text.encode("utf-8"))
 
-    imagurg = []
-    title = []
-    moneda = []
-    precio = []
-    urlitem = []
+    listtitulo_ebay = []
+    listprecio_ebay = []
+    listlink_ebay = []
+    listphoto_ebay = []
+    listmoneda_ebay =  []
+    listmetodo_ebay = []
     contador = 0
     while numresp > contador:
-        imagurg.append(dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][contador]['galleryURL'][0])
-        title.append(dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][contador]['title'][0])
+        listtitulo_ebay.append(dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][contador]['title'][0])
         monedac = dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][contador]['sellingStatus'][0]['currentPrice'][0]['@currencyId']
         monedac = monedac.replace("USD", "$")
-        moneda.append(monedac)
-        urlitem.append(dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][contador]['viewItemURL'][0])
-        precio.append(dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][contador]['sellingStatus'][0]['currentPrice'][0]['__value__'])
+        listmoneda_ebay.append(monedac)
+        listlink_ebay.append(dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][contador]['viewItemURL'][0])
+        listprecio_ebay.append(dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][contador]['sellingStatus'][0]['currentPrice'][0]['__value__'])
+        listmetodo_ebay.append('Ebay')
+        photoebay = dicc['findItemsByKeywordsResponse'][0]['searchResult'][0]['item'][contador]['galleryURL'][0]
+        if photoebay == '':
+            photo = 'http://www.kerrdental.es/res/global/product_515_275_noPhoto.jpg'
+        listphoto_ebay.append(photoebay)
         contador = contador + 1
 
-    return template('resultado.html',imagurgh=imagurg,titleh=title,monedah=moneda,precioh=precio,urlitemh=urlitem)
+    dicebay = {'listtitulo_ebay':listtitulo_ebay,'listprecio_ebay':listprecio_ebay,'listlink_ebay':listlink_ebay,'listphoto_ebay':listphoto_ebay,'listmoneda_ebay':listmoneda_ebay,'listmetodo_ebay':listmetodo_ebay}
+    return dicebay
     
