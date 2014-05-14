@@ -49,20 +49,20 @@ def resultado():
     try:
         return AdNailResultado(appid,numpag,entrada)
     except:
-        return template('index.html')
+        return template('busqueda_error.html')
 
 @route('/resultado+')
 def resultado():
     entrada = request.cookies.get('entrada', 'entrada')
     numpag = int(request.cookies.get('busqueda', 'metodo'))
-    if numpag < 90:
+    if numpag < 35:
         numpag = numpag + 1
     response.set_cookie('busqueda', str(numpag))
 
     try:
         return AdNailResultado(appid,numpag,entrada)
     except:
-        return template('index.html')
+        return template('busqueda_error.html')
 
 @route('/resultado-')
 def resultado():
@@ -75,7 +75,7 @@ def resultado():
     try:
         return AdNailResultado(appid,numpag,entrada)
     except:
-        return template('index.html')
+        return template('busqueda_error.html')
 
 #Deteccion de entorno, OpenShift o local.
 shift_local()
