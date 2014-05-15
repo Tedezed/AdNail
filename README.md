@@ -27,8 +27,9 @@ BrainSlung no es mas que un conjunto de funciones de creación propia que permit
 | ------------- |:-------------:| ---------:|
 | ebay          | API           | Incluido  |
 | MilAnuncios   | Web Scraping  | Incluido  |
+| TusAnuncios   | Web Scraping  | Incluido  |
+| Amazon        | API           | Previsto  |
 | SegundaMano   | Web Scraping  | Previsto  |
-| TusAnuncios   | Web Scraping  | Previsto  |
 | ElBaul        | Web Scraping  |    N/N    |
 | Loquo         | Web Scraping  |    N/N    |
 | idealista     |     N/N       |    N/N    |
