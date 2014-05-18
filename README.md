@@ -7,7 +7,7 @@ Api Web for self-generation product sales pages anonymously.
 
 Esta aplicación busca reducir el tiempo que invierte en buscar productos y articulos simplificando la busqueda dentro de una sola en webs de ventas de productos de primera y segunda mano.
 
-AdNail Buscarod de articulos de segunda mano, URL: http://bottle-adnail.rhcloud.com/
+AdNail Buscador de articulos, URL: http://bottle-adnail.rhcloud.com/
 
 ####2.¿De donde nace AdNail?
 
